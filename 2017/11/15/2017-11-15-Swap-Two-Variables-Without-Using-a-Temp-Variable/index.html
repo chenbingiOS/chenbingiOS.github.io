@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>不用临时变量交换两个数 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="不用临时变量实现 swap(a,b)不使用临时变量的情况下，交换两个数字的方法 加减法实现123a = a + b;  // a =  5 + 8 = 13b = a - b;  // b = 13 - 8 = 5a = a - b;  // a = 13 - 5 = 8 详解123a1 = a + b; b = a1 - b = a + b - b = a; a = a1 - b = a + b">
+<meta name="keywords" content="C,Swap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不用临时变量交换两个数">
+<meta property="og:url" content="http://yoursite.com/2017/11/15/2017-11-15-Swap-Two-Variables-Without-Using-a-Temp-Variable/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="不用临时变量实现 swap(a,b)不使用临时变量的情况下，交换两个数字的方法 加减法实现123a = a + b;  // a =  5 + 8 = 13b = a - b;  // b = 13 - 8 = 5a = a - b;  // a = 13 - 5 = 8 详解123a1 = a + b; b = a1 - b = a + b - b = a; a = a1 - b = a + b">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/img/in-post/post-swap-num/post-swap-num-1.png">
+<meta property="og:image" content="http://yoursite.com/img/in-post/post-swap-num/post-swap-num-1.png">
+<meta property="og:updated_time" content="2018-10-10T07:36:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="不用临时变量交换两个数">
+<meta name="twitter:description" content="不用临时变量实现 swap(a,b)不使用临时变量的情况下，交换两个数字的方法 加减法实现123a = a + b;  // a =  5 + 8 = 13b = a - b;  // b = 13 - 8 = 5a = a - b;  // a = 13 - 5 = 8 详解123a1 = a + b; b = a1 - b = a + b - b = a; a = a1 - b = a + b">
+<meta name="twitter:image" content="http://yoursite.com/img/in-post/post-swap-num/post-swap-num-1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-11-15-Swap-Two-Variables-Without-Using-a-Temp-Variable" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/15/2017-11-15-Swap-Two-Variables-Without-Using-a-Temp-Variable/" class="article-date">
+  <time datetime="2017-11-14T16:00:00.000Z" itemprop="datePublished">2017-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      不用临时变量交换两个数
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="不用临时变量实现-swap-a-b"><a href="#不用临时变量实现-swap-a-b" class="headerlink" title="不用临时变量实现 swap(a,b)"></a>不用临时变量实现 swap(a,b)</h1><p>不使用临时变量的情况下，交换两个数字的方法</p>
+<h2 id="加减法"><a href="#加减法" class="headerlink" title="加减法"></a>加减法</h2><p>实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = a + b;  // a =  5 + 8 = 13</span><br><span class="line">b = a - b;  // b = 13 - 8 = 5</span><br><span class="line">a = a - b;  // a = 13 - 5 = 8</span><br></pre></td></tr></table></figure></p>
+<p>详解<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a1 = a + b;</span><br><span class="line"> b = a1 - b = a + b - b = a;</span><br><span class="line"> a = a1 - b = a + b - a = b;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/img/in-post/post-swap-num/post-swap-num-1.png" alt="img"></p>
+<p>用加减法可以处理整型，浮点型数值，需要考虑溢出问题（精度损失）。</p>
+<p></p><h2 id="overflowProblem">溢出问题</h2><br>因为 C 语言数据类型区分 short int float, unsigned short unsigned int, 即识别正数，负数。<p></p>
+<p>对于正数，反码，补码与原码相同。<br><br>对于负数，补码是原码的符号位不变，数值部分按位取反再加1</p>
+<p>以 short 举例<br><br>short 型数据是 16 位表示最高位是符号位，所以只有 15 位表示数值。<br><br>15位 000000000000000 - 111111111111111 表示的范围是0 ~ 32767，<br><br>加上最高位的符号位（第16位），就可以表示 -32768 ~ 32767 。<br><br>unsigned short 型数据是 16 位都用来表示数值，<br><br>16位0000000000000000 - 1111111111111111 表示的范围是 0 ~ 65535。</p>
+<p>计算机在进行计算时是用补数计算的，且如果溢出会进行丢位处理。<br><br>short 型最正数 32767 补码是 0111111111111111 加1后为 1000000000000000（注意最高位是符号位），1000000000000000 正是 -32768 的补数。<br><br>unsigned short 型数据无符号最大数 65535 为 1111111111111111（16位），加1后为 10000000000000000（17位）计算机判断溢出后丢弃第17位，变为 0000000000000000 就是 0</p>
+<h2 id="异或法"><a href="#异或法" class="headerlink" title="异或法"></a>异或法</h2><p>实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = a ^ b;</span><br><span class="line">b = b ^ a;</span><br><span class="line">a = a ^ b;</span><br></pre></td></tr></table></figure></p>
+<p>详解<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a1 = a ^ b;</span><br><span class="line"> b = b ^ a1 = b ^ a ^ b = a;</span><br><span class="line"> a = a1 ^ b = a ^ b ^ a = b;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/img/in-post/post-swap-num/post-swap-num-1.png" alt="img"></p>
+<p>异或方式同样需要考虑<a href="#overflowProblem">溢出问题</a>（精度损失）。<br><br>异或的方式是将数字转换为二进制进行异或处理。<br><br>异或二进制数规则，相同为零，不同为1</p>
+<p>明细<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">          8 4 2 1			</span><br><span class="line"></span><br><span class="line">5  二进制  0 1 0 1</span><br><span class="line">8  二进制  1 0 0 0</span><br><span class="line">-----------------</span><br><span class="line">xor       1 1 0 1    --&gt;  a1 = 13</span><br><span class="line"></span><br><span class="line">8  二进制  1 0 0 0</span><br><span class="line">13 二进制  1 1 0 1</span><br><span class="line">-----------------</span><br><span class="line">xor       0 1 0 1    --&gt;  b = 5</span><br><span class="line"></span><br><span class="line">13 二进制  1 1 0 1</span><br><span class="line">5  二进制  0 1 0 1</span><br><span class="line">-----------------</span><br><span class="line">xor       1 0 0 0    --&gt;  a = 8</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/15/2017-11-15-Swap-Two-Variables-Without-Using-a-Temp-Variable/" data-id="cjnbc05rs0013cs2hu7hmct38" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swap/">Swap</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/22/2017-12-22-UITableViewHeaderFooterView-background-color/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          UITableViewHeaderFooterView在Xib下背景色警告
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/13/2017-10-13-iOS-multi-touch/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">多点触控</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IB/">IB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nib/">Nib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plug-ins/">Plug-ins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swap/">Swap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Touch/">Touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIButton/">UIButton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITableViewHeaderFooterView/">UITableViewHeaderFooterView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Universal-Links/">Universal Links</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xib/">Xib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-7/">iOS 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iPhone/">iPhone</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textAlignment/">textAlignment</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/IB/" style="font-size: 10px;">IB</a> <a href="/tags/Nib/" style="font-size: 10px;">Nib</a> <a href="/tags/Plug-ins/" style="font-size: 10px;">Plug-ins</a> <a href="/tags/Swap/" style="font-size: 10px;">Swap</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/Touch/" style="font-size: 10px;">Touch</a> <a href="/tags/UIButton/" style="font-size: 10px;">UIButton</a> <a href="/tags/UITableViewHeaderFooterView/" style="font-size: 10px;">UITableViewHeaderFooterView</a> <a href="/tags/Universal-Links/" style="font-size: 10px;">Universal Links</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/Xib/" style="font-size: 20px;">Xib</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS-7/" style="font-size: 10px;">iOS 7</a> <a href="/tags/iPhone/" style="font-size: 10px;">iPhone</a> <a href="/tags/textAlignment/" style="font-size: 10px;">textAlignment</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/12/2018-1010-Resume/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/24/2018-01-24-Xcode-Plug-ins-Delete/">Xcode 插件卸载</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/22/2018-01-22-universal-links/">Universal Links 实现过程中的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/25/2017-12-25-UIButton-titleLabel-textAlignment/">UIButton的textAlignment属性无效</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/25/2017-12-25-Compiling-IB-documents/">Xib 文件需要从 iOS 7 以后支持</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
